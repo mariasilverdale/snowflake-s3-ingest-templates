@@ -1,0 +1,16 @@
+USE DATABASE INGEST_DB;
+
+-- IMPORTANT:
+-- Do NOT commit real credentials to Git.
+-- Paste the real values only when executing in Snowflake.
+
+CREATE OR REPLACE STAGE OPS.STG_S3_EXPORTS_KEYS
+  URL = 's3://<YOUR_BUCKET_NAME>/<YOUR_PREFIX>/'
+  CREDENTIALS = (
+    AWS_KEY_ID = '<PASTE_ACCESS_KEY_ID_HERE>'
+    AWS_SECRET_KEY = '<PASTE_SECRET_ACCESS_KEY_HERE>'
+  )
+  FILE_FORMAT = OPS.FF_CSV_STD;
+
+-- Test
+LIST @OPS.STG_S3_EXPORTS_KEYS;
